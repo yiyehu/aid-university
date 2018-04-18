@@ -2,6 +2,17 @@
 基于开源框架 renren.io 的 renren-fast 框架
 
 
+java后台： https://github.com/yiyehu/aid-university
+web前端： https://github.com/yiyehu/aid-university-web
+MUI移动端：https://github.com/yiyehu/aid-university-app
+<br> 
+
+**项目演示**
+- 演示地址：http://yiyehu.tech/aid-university
+- 账号密码：admin/admin
+<br> 
+
+
 **项目结构** 
 ```
 renren-fast
@@ -30,7 +41,3 @@ renren-fast
 ```
 <br> 
 
- **项目演示**
-- 演示地址：http://
-- 账号密码：admin/admin
-<br> 
