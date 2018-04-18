@@ -1,10 +1,9 @@
 **项目说明** 
-基于开源框架 renren.io 的 renren-fast 框架
+校园帮帮系统
 
-
-java后台： https://github.com/yiyehu/aid-university
-web前端： https://github.com/yiyehu/aid-university-web
-MUI移动端：https://github.com/yiyehu/aid-university-app
+- java后台： https://github.com/yiyehu/aid-university
+- web前端： https://github.com/yiyehu/aid-university-web
+- MUI移动端：https://github.com/yiyehu/aid-university-app
 <br> 
 
 **项目演示**
@@ -14,6 +13,7 @@ MUI移动端：https://github.com/yiyehu/aid-university-app
 
 
 **项目结构** 
+ - 基于开源框架 renren.io 的 renren-fast 框架
 ```
 renren-fast
 ├─db  项目SQL语句
