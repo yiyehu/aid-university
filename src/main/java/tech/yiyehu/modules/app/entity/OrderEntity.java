@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
- * @date 2018-04-07 18:06:12
+ * @date 2018-04-18 14:41:52
  */
 @TableName("tb_order")
 public class OrderEntity implements Serializable {
@@ -31,13 +31,13 @@ public class OrderEntity implements Serializable {
 	 */
 	private Long commentId;
 	/**
+	 * 收货地址ID
+	 */
+	private Long addressId;
+	/**
 	 * 用户ID
 	 */
 	private Long userId;
-	/**
-	 * 订单时间
-	 */
-	private Date 订单时间;
 	/**
 	 * 是否评价
 	 */
@@ -47,9 +47,53 @@ public class OrderEntity implements Serializable {
 	 */
 	private Integer status;
 	/**
+	 * 下单时间
+	 */
+	private Date createTime;
+	/**
 	 * 备注
 	 */
 	private String remark;
+	/**
+	 * 商品金额
+	 */
+	private Integer goodsMoney;
+	/**
+	 * 收货方式
+	 */
+	private Integer deliverType;
+	/**
+	 * 快递费用
+	 */
+	private Integer deliverMoney;
+	/**
+	 * 订单总金额
+	 */
+	private Integer totalMoney;
+	/**
+	 * 实际订单总金额
+	 */
+	private Integer realTotalMoney;
+	/**
+	 * 付费方式
+	 */
+	private Integer paytype;
+	/**
+	 * 支付来源
+	 */
+	private Integer payfrom;
+	/**
+	 * 收货人姓名
+	 */
+	private String userName;
+	/**
+	 * 收货人地址
+	 */
+	private String userAdress;
+	/**
+	 * 收货人手机
+	 */
+	private String userMobile;
 
 	/**
 	 * 设置：订单ID
@@ -88,6 +132,18 @@ public class OrderEntity implements Serializable {
 		return commentId;
 	}
 	/**
+	 * 设置：收货地址ID
+	 */
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+	/**
+	 * 获取：收货地址ID
+	 */
+	public Long getAddressId() {
+		return addressId;
+	}
+	/**
 	 * 设置：用户ID
 	 */
 	public void setUserId(Long userId) {
@@ -98,18 +154,6 @@ public class OrderEntity implements Serializable {
 	 */
 	public Long getUserId() {
 		return userId;
-	}
-	/**
-	 * 设置：订单时间
-	 */
-	public void set订单时间(Date 订单时间) {
-		this.订单时间 = 订单时间;
-	}
-	/**
-	 * 获取：订单时间
-	 */
-	public Date get订单时间() {
-		return 订单时间;
 	}
 	/**
 	 * 设置：是否评价
@@ -136,6 +180,18 @@ public class OrderEntity implements Serializable {
 		return status;
 	}
 	/**
+	 * 设置：下单时间
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	/**
+	 * 获取：下单时间
+	 */
+	public Date getCreateTime() {
+		return createTime;
+	}
+	/**
 	 * 设置：备注
 	 */
 	public void setRemark(String remark) {
@@ -146,5 +202,125 @@ public class OrderEntity implements Serializable {
 	 */
 	public String getRemark() {
 		return remark;
+	}
+	/**
+	 * 设置：商品金额
+	 */
+	public void setGoodsMoney(Integer goodsMoney) {
+		this.goodsMoney = goodsMoney;
+	}
+	/**
+	 * 获取：商品金额
+	 */
+	public Integer getGoodsMoney() {
+		return goodsMoney;
+	}
+	/**
+	 * 设置：收货方式
+	 */
+	public void setDeliverType(Integer deliverType) {
+		this.deliverType = deliverType;
+	}
+	/**
+	 * 获取：收货方式
+	 */
+	public Integer getDeliverType() {
+		return deliverType;
+	}
+	/**
+	 * 设置：快递费用
+	 */
+	public void setDeliverMoney(Integer deliverMoney) {
+		this.deliverMoney = deliverMoney;
+	}
+	/**
+	 * 获取：快递费用
+	 */
+	public Integer getDeliverMoney() {
+		return deliverMoney;
+	}
+	/**
+	 * 设置：订单总金额
+	 */
+	public void setTotalMoney(Integer totalMoney) {
+		this.totalMoney = totalMoney;
+	}
+	/**
+	 * 获取：订单总金额
+	 */
+	public Integer getTotalMoney() {
+		return totalMoney;
+	}
+	/**
+	 * 设置：实际订单总金额
+	 */
+	public void setRealTotalMoney(Integer realTotalMoney) {
+		this.realTotalMoney = realTotalMoney;
+	}
+	/**
+	 * 获取：实际订单总金额
+	 */
+	public Integer getRealTotalMoney() {
+		return realTotalMoney;
+	}
+	/**
+	 * 设置：付费方式
+	 */
+	public void setPaytype(Integer paytype) {
+		this.paytype = paytype;
+	}
+	/**
+	 * 获取：付费方式
+	 */
+	public Integer getPaytype() {
+		return paytype;
+	}
+	/**
+	 * 设置：支付来源
+	 */
+	public void setPayfrom(Integer payfrom) {
+		this.payfrom = payfrom;
+	}
+	/**
+	 * 获取：支付来源
+	 */
+	public Integer getPayfrom() {
+		return payfrom;
+	}
+	/**
+	 * 设置：收货人姓名
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	/**
+	 * 获取：收货人姓名
+	 */
+	public String getUserName() {
+		return userName;
+	}
+	/**
+	 * 设置：收货人地址
+	 */
+	public void setUserAdress(String userAdress) {
+		this.userAdress = userAdress;
+	}
+	/**
+	 * 获取：收货人地址
+	 */
+	public String getUserAdress() {
+		return userAdress;
+	}
+	/**
+	 * 设置：收货人手机
+	 */
+	public void setUserMobile(String userMobile) {
+		this.userMobile = userMobile;
+	}
+	/**
+	 * 获取：收货人手机
+	 */
+	public String getUserMobile() {
+		return userMobile;
 	}
 }

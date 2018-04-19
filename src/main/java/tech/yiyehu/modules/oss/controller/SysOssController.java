@@ -138,9 +138,9 @@ public class SysOssController {
 
 
 		//本地文件操作
-		String localPath = FileUtils.resoucePath+"image/" + FileUtils.getFileName(url);
+		String localPath = SysOssController.class.getResource("/").getPath()+"image/" + FileUtils.getFileName(url);
 		FileUtils.fileWriter(localPath, file.getBytes());
-		return R.ok().put("pathKey", url).put("localPath", "http://localhost:8080/aid-university/image/"+FileUtils.getFileName(url)).put("name",name).put("type", file.getContentType());
+		return R.ok().put("pathKey", url).put("localPath", "image/"+FileUtils.getFileName(url)).put("name",name).put("type", file.getContentType());
 	}
 
 

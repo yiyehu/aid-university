@@ -3,6 +3,8 @@ package tech.yiyehu.modules.app.service.impl;
 import java.io.File;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -22,6 +24,7 @@ import tech.yiyehu.modules.oss.utils.FileUtils;
 @Service("goodsImagesService")
 public class GoodsImagesServiceImpl extends ServiceImpl<GoodsImagesDao, GoodsImagesEntity> implements GoodsImagesService {
 
+	private final static Logger logger = LoggerFactory.getLogger(GoodsImagesServiceImpl.class); 
 	
 	GoodsImagesDao goodsImagesDao;
     @Override
@@ -30,7 +33,20 @@ public class GoodsImagesServiceImpl extends ServiceImpl<GoodsImagesDao, GoodsIma
                 new Query<GoodsImagesEntity>(params).getPage(),
                 new EntityWrapper<GoodsImagesEntity>()
         );
-
+        File file=null;
+		String realPath;
+        for(GoodsImagesEntity entity : page.getRecords()) {
+			realPath = FileUtils.resoucePath+"image/"+FileUtils.getFileName(entity.getLocalPath());
+			logger.debug(realPath);
+			logger.info(realPath);
+			logger.error(realPath);
+			file = new File(realPath);
+			if(!file.exists()) {
+				CloudStorageService cloudStorage  = OSSFactory.build();
+				cloudStorage.download(entity.getPathKey(), realPath);
+			}
+			
+		}
         return new PageUtils(page);
     }
 	@Override
@@ -44,6 +60,9 @@ public class GoodsImagesServiceImpl extends ServiceImpl<GoodsImagesDao, GoodsIma
 		String realPath;
 		for(GoodsImagesEntity entity : page.getRecords()) {
 			realPath = FileUtils.resoucePath+"image/"+FileUtils.getFileName(entity.getLocalPath());
+			logger.debug(realPath);
+			logger.info(realPath);
+			logger.error(realPath);
 			file = new File(realPath);
 			if(!file.exists()) {
 				CloudStorageService cloudStorage  = OSSFactory.build();

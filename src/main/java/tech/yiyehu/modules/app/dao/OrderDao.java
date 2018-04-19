@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
- * @date 2018-04-07 18:06:12
+ * @date 2018-04-18 14:41:52
  */
 @Mapper
 public interface OrderDao extends BaseMapper<OrderEntity> {

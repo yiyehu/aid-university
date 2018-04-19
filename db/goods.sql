@@ -187,11 +187,22 @@ create table tb_order
    order_id             bigint not null AUTO_INCREMENT COMMENT '订单ID',
    goods_id             int COMMENT '商品ID',
    comment_id           bigint COMMENT '评价ID',
+   address_id           bigint COMMENT '收货地址ID',
    user_id              bigint COMMENT '用户ID',
-   订单时间                 datetime not null COMMENT '订单时间',
    is_comment           smallint COMMENT '是否评价',
    status               smallint COMMENT '订单状态',
+   create_time          datetime not null COMMENT '下单时间',
    remark               varchar(200) COMMENT '备注',
+   goods_money          int COMMENT '商品金额',
+   deliver_type         smallint COMMENT '收货方式',
+   deliver_money        int COMMENT '快递费用',
+   total_money          int COMMENT '订单总金额',
+   real_total_money     int COMMENT '实际订单总金额',
+   payType              smallint COMMENT '付费方式',
+   payFrom              smallint COMMENT '支付来源',
+   user_name            varchar(30) COMMENT '收货人姓名',
+   user_adress          varchar(50) COMMENT '收货人地址',
+   user_mobile          varchar(20) COMMENT '收货人手机',
    primary key (order_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单' AUTO_INCREMENT=1;
 
@@ -201,10 +212,11 @@ alter table tb_order add constraint FK_Relationship_7 foreign key (comment_id)
 alter table tb_order add constraint FK_goods_many foreign key (goods_id)
       references tb_goods (goods_id) on delete restrict on update restrict;
 
+alter table tb_order add constraint FK_order_deliver_address foreign key (address_id)
+      references tb_user_address (address_id) on delete restrict on update restrict;
+
 alter table tb_order add constraint FK_tb_user_order foreign key (user_id)
       references tb_user (user_id) on delete restrict on update restrict;
-
-	  
 
 drop table if exists tb_goods_images;
 
@@ -223,5 +235,23 @@ create table tb_goods_images
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='商品图片' AUTO_INCREMENT=1;
 
 
+drop table if exists tb_carts;
+
+/*==============================================================*/
+/* Table: carts                                                 */
+/*==============================================================*/
+create table tb_carts
+(
+   cart_id              bigint not null AUTO_INCREMENT COMMENT '购物车ID',
+   user_id              bigint COMMENT '用户ID',
+   goods_id             int COMMENT '商品ID',
+   primary key (cart_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='购物车' AUTO_INCREMENT=1;
+
+alter table carts add constraint FK_cart_goods foreign key (goods_id)
+      references tb_goods (goods_id) on delete restrict on update restrict;
+
+alter table carts add constraint FK_cart_user foreign key (user_id)
+      references tb_user (user_id) on delete restrict on update restrict;
 	  
 	  
