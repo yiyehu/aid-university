@@ -90,7 +90,13 @@ public class AliyunCloudStorageService extends CloudStorageService {
 	public boolean download(String key,String localPath) {
 		File localFile = new File(localPath);
 		if(!localFile.exists()) {
-			client.getObject(new GetObjectRequest(config.getAliyunBucketName(), key),localFile);
+			try {
+
+				client.getObject(new GetObjectRequest(config.getAliyunBucketName(), key),localFile);
+			}
+			catch(Exception e) {
+				return true;
+			}
 			return true;
 		}
 		return false;

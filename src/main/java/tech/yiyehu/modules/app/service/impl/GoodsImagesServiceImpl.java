@@ -20,58 +20,59 @@ import tech.yiyehu.modules.oss.cloud.CloudStorageService;
 import tech.yiyehu.modules.oss.cloud.OSSFactory;
 import tech.yiyehu.modules.oss.utils.FileUtils;
 
-
 @Service("goodsImagesService")
-public class GoodsImagesServiceImpl extends ServiceImpl<GoodsImagesDao, GoodsImagesEntity> implements GoodsImagesService {
+public class GoodsImagesServiceImpl extends ServiceImpl<GoodsImagesDao, GoodsImagesEntity>
+		implements GoodsImagesService {
 
-	private final static Logger logger = LoggerFactory.getLogger(GoodsImagesServiceImpl.class); 
-	
+	private final static Logger logger = LoggerFactory.getLogger(GoodsImagesServiceImpl.class);
+
 	GoodsImagesDao goodsImagesDao;
-    @Override
-    public PageUtils queryPage(Map<String, Object> params) {
-        Page<GoodsImagesEntity> page = this.selectPage(
-                new Query<GoodsImagesEntity>(params).getPage(),
-                new EntityWrapper<GoodsImagesEntity>()
-        );
-        File file=null;
-		String realPath;
-        for(GoodsImagesEntity entity : page.getRecords()) {
-			realPath = FileUtils.resoucePath+"image/"+FileUtils.getFileName(entity.getLocalPath());
-			logger.debug(realPath);
-			logger.info(realPath);
-			logger.error(realPath);
-			file = new File(realPath);
-			if(!file.exists()) {
-				CloudStorageService cloudStorage  = OSSFactory.build();
-				cloudStorage.download(entity.getPathKey(), realPath);
-			}
-			
-		}
-        return new PageUtils(page);
-    }
+
 	@Override
-	public PageUtils queryPageWithWhere(Map<String, Object> params, GoodsImagesEntity goodsImagesEntity) {
-		
-		Page<GoodsImagesEntity> page = this.selectPage(
-                new Query<GoodsImagesEntity>(params).getPage(),
-                new EntityWrapper<GoodsImagesEntity>(goodsImagesEntity)
-        );
-		File file=null;
+	public PageUtils queryPage(Map<String, Object> params) {
+		Page<GoodsImagesEntity> page = this.selectPage(new Query<GoodsImagesEntity>(params).getPage(),
+				new EntityWrapper<GoodsImagesEntity>());
+		File file = null;
+		File image = new File(FileUtils.resoucePath + "image/");
+		if (!image.exists()) {
+			image.mkdirs();
+		}
 		String realPath;
-		for(GoodsImagesEntity entity : page.getRecords()) {
-			realPath = FileUtils.resoucePath+"image/"+FileUtils.getFileName(entity.getLocalPath());
+		for (GoodsImagesEntity entity : page.getRecords()) {
+			realPath = FileUtils.resoucePath + "image/" + FileUtils.getFileName(entity.getLocalPath());
 			logger.debug(realPath);
 			logger.info(realPath);
 			logger.error(realPath);
 			file = new File(realPath);
-			if(!file.exists()) {
-				CloudStorageService cloudStorage  = OSSFactory.build();
+			if (!file.exists()) {
+				CloudStorageService cloudStorage = OSSFactory.build();
 				cloudStorage.download(entity.getPathKey(), realPath);
 			}
-			
+
 		}
-        return new PageUtils(page);
+		return new PageUtils(page);
 	}
 
+	@Override
+	public PageUtils queryPageWithWhere(Map<String, Object> params, GoodsImagesEntity goodsImagesEntity) {
+
+		Page<GoodsImagesEntity> page = this.selectPage(new Query<GoodsImagesEntity>(params).getPage(),
+				new EntityWrapper<GoodsImagesEntity>(goodsImagesEntity));
+		File file = null;
+		String realPath;
+		for (GoodsImagesEntity entity : page.getRecords()) {
+			realPath = FileUtils.resoucePath + "image/" + FileUtils.getFileName(entity.getLocalPath());
+			logger.debug(realPath);
+			logger.info(realPath);
+			logger.error(realPath);
+			file = new File(realPath);
+			if (!file.exists()) {
+				CloudStorageService cloudStorage = OSSFactory.build();
+				cloudStorage.download(entity.getPathKey(), realPath);
+			}
+
+		}
+		return new PageUtils(page);
+	}
 
 }

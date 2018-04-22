@@ -23,6 +23,5 @@
         <result property="categoryIcon" column="category_icon"/>
         <result property="goodsImg" column="goods_img"/>
     </resultMap>
-    
 
 </mapper>

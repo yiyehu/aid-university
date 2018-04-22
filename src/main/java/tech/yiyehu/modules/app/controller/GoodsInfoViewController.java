@@ -15,9 +15,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
 import tech.yiyehu.modules.app.annotation.Login;
+import tech.yiyehu.modules.app.entity.GoodsEntity;
 import tech.yiyehu.modules.app.entity.GoodsInfoViewEntity;
 import tech.yiyehu.modules.app.entity.MessageEntity;
 import tech.yiyehu.modules.app.service.GoodsInfoViewService;
+import tech.yiyehu.modules.app.service.GoodsService;
 import tech.yiyehu.modules.app.service.MessageService;
 
 
@@ -35,6 +37,9 @@ public class GoodsInfoViewController {
     @Autowired
     private GoodsInfoViewService goodsInfoViewService;
 
+    @Autowired
+    private GoodsService goodsService;
+    
     @Autowired
     private MessageService messageService;
     /**
@@ -64,9 +69,9 @@ public class GoodsInfoViewController {
      * 信息
      */
     @RequestMapping("/info/{goodsId}")
-    public R info(@PathVariable("goodsId") Integer goodsId){
-    	GoodsInfoViewEntity goodsInfoViewEntity = goodsInfoViewService.selectById(goodsId);
-        return R.ok().put("goodsInfoView", goodsInfoViewEntity);
+    public R info(@PathVariable("goodsId") Long goodsId){
+    	GoodsEntity goodsEntity = goodsService.selectById(goodsId);
+        return R.ok().put("goods", goodsEntity);
     }
 
 

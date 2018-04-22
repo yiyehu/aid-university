@@ -155,8 +155,8 @@ create table tb_goods
    price                numeric(10,2) not null COMMENT '价格',
    newprice             numeric(10,2) COMMENT '新货价格',
    status               smallint not null COMMENT '状态',
-   addtime              int COMMENT '添加时间',
-   updatetime           int COMMENT '更新时间',
+   addtime              datetime COMMENT '添加时间',
+   updatetime           datetime COMMENT '更新时间',
    goods_address		varchar(200) COMMENT '商品地址',
    description          varchar(200) COMMENT '商品描述',
    decoration           text COMMENT '商品装潢',
@@ -302,6 +302,7 @@ select
    c.name as category_name,
    c.icon as category_icon,
    d.local_path as goods_img
+   d.path_key as path_key
 from
    tb_goods as a 
    left join tb_user as b on a.user_id=b.user_id

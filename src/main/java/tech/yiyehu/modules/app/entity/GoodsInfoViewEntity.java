@@ -2,11 +2,13 @@ package tech.yiyehu.modules.app.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * 商品
@@ -51,7 +53,7 @@ public class GoodsInfoViewEntity implements Serializable {
 	/**
 	 * 添加时间
 	 */
-	private Integer addtime;
+	private Date addtime;
 	/**
 	 * 更新时间
 	 */
@@ -62,7 +64,11 @@ public class GoodsInfoViewEntity implements Serializable {
 	 * 商品地址
 	 */
 	private String goodsAddress;
-	
+	/**
+	 * 商品地址
+	 */
+	@JsonIgnore
+	private String pathKey;
 	/**
 	 * 商品描述
 	 */
@@ -168,10 +174,10 @@ public class GoodsInfoViewEntity implements Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public Integer getAddtime() {
+	public Date getAddtime() {
 		return addtime;
 	}
-	public void setAddtime(Integer addtime) {
+	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
 	public Integer getUpdatetime() {
@@ -239,6 +245,12 @@ public class GoodsInfoViewEntity implements Serializable {
 	}
 	public void setMessageCount(Integer messageCount) {
 		this.messageCount = messageCount;
+	}
+	public String getPathKey() {
+		return pathKey;
+	}
+	public void setPathKey(String pathKey) {
+		this.pathKey = pathKey;
 	}
 	
 

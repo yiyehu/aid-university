@@ -2,6 +2,7 @@ package tech.yiyehu.modules.app.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
@@ -49,7 +50,7 @@ public class GoodsEntity implements Serializable {
 	/**
 	 * 添加时间
 	 */
-	private Integer addtime;
+	private Date addtime;
 	/**
 	 * 商品地址
 	 */
@@ -57,7 +58,7 @@ public class GoodsEntity implements Serializable {
 	/**
 	 * 更新时间
 	 */
-	private Integer updatetime;
+	private Date updatetime;
 	/**
 	 * 商品描述
 	 */
@@ -154,13 +155,13 @@ public class GoodsEntity implements Serializable {
 	/**
 	 * 设置：添加时间
 	 */
-	public void setAddtime(Integer addtime) {
+	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
 	/**
 	 * 获取：添加时间
 	 */
-	public Integer getAddtime() {
+	public Date getAddtime() {
 		return addtime;
 	}
 	/**
@@ -178,13 +179,13 @@ public class GoodsEntity implements Serializable {
 	/**
 	 * 设置：更新时间
 	 */
-	public void setUpdatetime(Integer updatetime) {
+	public void setUpdatetime(Date updatetime) {
 		this.updatetime = updatetime;
 	}
 	/**
 	 * 获取：更新时间
 	 */
-	public Integer getUpdatetime() {
+	public Date getUpdatetime() {
 		return updatetime;
 	}
 	/**
