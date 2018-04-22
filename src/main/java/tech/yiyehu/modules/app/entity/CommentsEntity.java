@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
- * @date 2018-04-07 18:06:12
+ * @date 2018-04-20 22:01:08
  */
 @TableName("tb_comments")
 public class CommentsEntity implements Serializable {
@@ -38,6 +38,10 @@ public class CommentsEntity implements Serializable {
 	 * 添加时间
 	 */
 	private Date createTime;
+	/**
+	 * 订单id
+	 */
+	private Long orderId;
 
 	/**
 	 * 设置：评价ID
@@ -98,5 +102,17 @@ public class CommentsEntity implements Serializable {
 	 */
 	public Date getCreateTime() {
 		return createTime;
+	}
+	/**
+	 * 设置：订单id
+	 */
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+	/**
+	 * 获取：订单id
+	 */
+	public Long getOrderId() {
+		return orderId;
 	}
 }

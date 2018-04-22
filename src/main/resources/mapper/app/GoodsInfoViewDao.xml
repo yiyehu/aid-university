@@ -4,20 +4,25 @@
 <mapper namespace="tech.yiyehu.modules.app.dao.GoodsDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="tech.yiyehu.modules.app.entity.GoodsEntity" id="goodsMap">
+    <resultMap type="tech.yiyehu.modules.app.entity.GoodsInfoViewEntity" id="goodsInfoViewMap">
         <result property="goodsId" column="goods_id"/>
         <result property="userId" column="user_id"/>
         <result property="categoryId" column="category_id"/>
-        <result property="name" column="name"/>
+        <result property="goodsName" column="goods_name"/>
         <result property="price" column="price"/>
         <result property="newprice" column="newprice"/>
         <result property="status" column="status"/>
         <result property="addtime" column="addtime"/>
-        <result property="goodsAddress" column="goods_address"/>
         <result property="updatetime" column="updatetime"/>
+        <result property="goodsAddress" column="goods_address"/>
         <result property="description" column="description"/>
         <result property="decoration" column="decoration"/>
+        <result property="username" column="username"/>
+        <result property="userImg" column="user_img"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="categoryIcon" column="category_icon"/>
+        <result property="goodsImg" column="goods_img"/>
     </resultMap>
-
+    
 
 </mapper>

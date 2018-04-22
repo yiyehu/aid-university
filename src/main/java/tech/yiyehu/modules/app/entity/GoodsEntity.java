@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
- * @date 2018-04-07 18:06:12
+ * @date 2018-04-21 09:50:24
  */
 @TableName("tb_goods")
 public class GoodsEntity implements Serializable {
@@ -51,6 +51,10 @@ public class GoodsEntity implements Serializable {
 	 */
 	private Integer addtime;
 	/**
+	 * 商品地址
+	 */
+	private String goodsAddress;
+	/**
 	 * 更新时间
 	 */
 	private Integer updatetime;
@@ -58,6 +62,10 @@ public class GoodsEntity implements Serializable {
 	 * 商品描述
 	 */
 	private String description;
+	/**
+	 * 商品描述
+	 */
+	private String decoration;
 
 	/**
 	 * 设置：商品ID
@@ -156,6 +164,18 @@ public class GoodsEntity implements Serializable {
 		return addtime;
 	}
 	/**
+	 * 设置：商品地址
+	 */
+	public void setGoodsAddress(String goodsAddress) {
+		this.goodsAddress = goodsAddress;
+	}
+	/**
+	 * 获取：商品地址
+	 */
+	public String getGoodsAddress() {
+		return goodsAddress;
+	}
+	/**
 	 * 设置：更新时间
 	 */
 	public void setUpdatetime(Integer updatetime) {
@@ -178,5 +198,17 @@ public class GoodsEntity implements Serializable {
 	 */
 	public String getDescription() {
 		return description;
+	}
+	/**
+	 * 设置：商品描述
+	 */
+	public void setDecoration(String decoration) {
+		this.decoration = decoration;
+	}
+	/**
+	 * 获取：商品描述
+	 */
+	public String getDecoration() {
+		return decoration;
 	}
 }

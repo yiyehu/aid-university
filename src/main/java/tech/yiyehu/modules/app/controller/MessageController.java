@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.yiyehu.modules.app.entity.CommentsEntity;
-import tech.yiyehu.modules.app.service.CommentsService;
+import tech.yiyehu.modules.app.entity.MessageEntity;
+import tech.yiyehu.modules.app.service.MessageService;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
 
 
 
 /**
- * 评论
+ * 留言
  *
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
  * @date 2018-04-20 22:01:08
  */
 @RestController
-@RequestMapping("app/comments")
-public class CommentsController {
+@RequestMapping("app/message")
+public class MessageController {
     @Autowired
-    private CommentsService commentsService;
+    private MessageService messageService;
 
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("app:comments:list")
+    @RequiresPermissions("app:message:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = commentsService.queryPage(params);
+        PageUtils page = messageService.queryPage(params);
 
         return R.ok().put("page", page);
     }
@@ -46,21 +46,21 @@ public class CommentsController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{commentId}")
-    @RequiresPermissions("app:comments:info")
-    public R info(@PathVariable("commentId") Long commentId){
-			CommentsEntity comments = commentsService.selectById(commentId);
+    @RequestMapping("/info/{messageId}")
+    @RequiresPermissions("app:message:info")
+    public R info(@PathVariable("messageId") Long messageId){
+			MessageEntity message = messageService.selectById(messageId);
 
-        return R.ok().put("comments", comments);
+        return R.ok().put("message", message);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("app:comments:save")
-    public R save(@RequestBody CommentsEntity comments){
-			commentsService.insert(comments);
+    @RequiresPermissions("app:message:save")
+    public R save(@RequestBody MessageEntity message){
+			messageService.insert(message);
 
         return R.ok();
     }
@@ -69,9 +69,9 @@ public class CommentsController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("app:comments:update")
-    public R update(@RequestBody CommentsEntity comments){
-			commentsService.updateById(comments);
+    @RequiresPermissions("app:message:update")
+    public R update(@RequestBody MessageEntity message){
+			messageService.updateById(message);
 
         return R.ok();
     }
@@ -80,9 +80,9 @@ public class CommentsController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("app:comments:delete")
-    public R delete(@RequestBody Long[] commentIds){
-			commentsService.deleteBatchIds(Arrays.asList(commentIds));
+    @RequiresPermissions("app:message:delete")
+    public R delete(@RequestBody Long[] messageIds){
+			messageService.deleteBatchIds(Arrays.asList(messageIds));
 
         return R.ok();
     }

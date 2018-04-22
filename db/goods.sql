@@ -157,7 +157,9 @@ create table tb_goods
    status               smallint not null COMMENT '状态',
    addtime              int COMMENT '添加时间',
    updatetime           int COMMENT '更新时间',
-   description          text COMMENT '商品描述',
+   goods_address		varchar(200) COMMENT '商品地址',
+   description          varchar(200) COMMENT '商品描述',
+   decoration           text COMMENT '商品装潢',
    primary key (goods_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=1;
 
@@ -170,12 +172,36 @@ drop table if exists tb_comments;
 create table tb_comments
 (
    comment_id           bigint not null AUTO_INCREMENT COMMENT '评价ID',
+   order_id             bigint COMMENT '订单ID',
    content              varchar(1000) COMMENT '评价内容',
    star                 smallint COMMENT '星级',
    is_anon              smallint COMMENT '是否匿名',
    create_time          datetime COMMENT '添加时间',
    primary key (comment_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='评论' AUTO_INCREMENT=1;
+
+
+drop table if exists tb_message;
+
+/*==============================================================*/
+/* Table: tb_comments                                           */
+/*==============================================================*/
+create table tb_message
+(
+   message_id           bigint not null AUTO_INCREMENT COMMENT '留言ID',
+   parent_id            bigint COMMENT '留言的上级ID',
+   goods_id				int COMMENT '商品ID',
+   content              varchar(1000) COMMENT '留言内容',
+   is_anon              smallint COMMENT '是否匿名',
+   create_time          datetime COMMENT '添加时间',
+   user_id              char(10) COMMENT '留言人ID',
+   user_name            varchar(30) COMMENT '留言人姓名',
+   primary key (message_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='留言' AUTO_INCREMENT=1;
+
+
+alter table tb_message add constraint FK_goods_message foreign key (goods_id)
+      references tb_goods (goods_id) on delete restrict on update restrict;
 
 drop table if exists tb_order;
 
@@ -253,5 +279,33 @@ alter table carts add constraint FK_cart_goods foreign key (goods_id)
 
 alter table carts add constraint FK_cart_user foreign key (user_id)
       references tb_user (user_id) on delete restrict on update restrict;
-	  
+
+
+
+create view tb_goods_info_view
+as
+select
+   a.goods_id,
+   a.user_id,
+   a.category_id,
+   a.name as goods_name,
+   a.price,
+   a.newprice,
+   a.status,
+   a.addtime,
+   a.updatetime,
+   a.description,
+   a.goods_address,
+   a.decoration,
+   b.username,
+   b.img as user_img,
+   c.name as category_name,
+   c.icon as category_icon,
+   d.local_path as goods_img
+from
+   tb_goods as a 
+   left join tb_user as b on a.user_id=b.user_id
+   left join tb_category as c on a.category_id=c.category_id
+   left join tb_goods_images as d on a.goods_id=d.goods_id
+group by a.goods_id;
 	  

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.yiyehu.modules.app.entity.GoodsEntity;
-import tech.yiyehu.modules.app.service.GoodsService;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
+import tech.yiyehu.modules.app.entity.GoodsEntity;
+import tech.yiyehu.modules.app.service.GoodsService;
 
 
 
@@ -30,7 +30,6 @@ import tech.yiyehu.common.utils.R;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
-
     /**
      * 列表
      */
