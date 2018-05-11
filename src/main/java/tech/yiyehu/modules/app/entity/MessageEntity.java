@@ -11,7 +11,7 @@ import java.util.Date;
  * 
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
- * @date 2018-04-20 22:01:08
+ * @date 2018-04-28 12:38:44
  */
 @TableName("tb_message")
 public class MessageEntity implements Serializable {
@@ -27,17 +27,13 @@ public class MessageEntity implements Serializable {
 	 */
 	private Long parentId;
 	/**
-	 * 商品ID
-	 */
-	private Integer goodsId;
-	/**
 	 * 留言内容
 	 */
 	private String content;
 	/**
 	 * 是否匿名
 	 */
-	private Integer isAnon;
+	private Integer anon;
 	/**
 	 * 添加时间
 	 */
@@ -50,6 +46,22 @@ public class MessageEntity implements Serializable {
 	 * 留言人姓名
 	 */
 	private String userName;
+	/**
+	 * 对面聊天人的ID
+	 */
+	private Long talkTo;
+	/**
+	 * 对面聊天人的姓名
+	 */
+	private String talkToName;
+	/**
+	 * 消息类型ID
+	 */
+	private Long categoryId;
+	/**
+	 * 消息类型对应的服务ID
+	 */
+	private Long categoryMessageId;
 
 	/**
 	 * 设置：留言ID
@@ -76,18 +88,6 @@ public class MessageEntity implements Serializable {
 		return parentId;
 	}
 	/**
-	 * 设置：商品ID
-	 */
-	public void setGoodsId(Integer goodsId) {
-		this.goodsId = goodsId;
-	}
-	/**
-	 * 获取：商品ID
-	 */
-	public Integer getGoodsId() {
-		return goodsId;
-	}
-	/**
 	 * 设置：留言内容
 	 */
 	public void setContent(String content) {
@@ -102,14 +102,14 @@ public class MessageEntity implements Serializable {
 	/**
 	 * 设置：是否匿名
 	 */
-	public void setIsAnon(Integer isAnon) {
-		this.isAnon = isAnon;
+	public void setAnon(Integer anon) {
+		this.anon = anon;
 	}
 	/**
 	 * 获取：是否匿名
 	 */
-	public Integer getIsAnon() {
-		return isAnon;
+	public Integer getAnon() {
+		return anon;
 	}
 	/**
 	 * 设置：添加时间
@@ -146,5 +146,53 @@ public class MessageEntity implements Serializable {
 	 */
 	public String getUserName() {
 		return userName;
+	}
+	/**
+	 * 设置：对面聊天人的ID
+	 */
+	public void setTalkTo(Long talkTo) {
+		this.talkTo = talkTo;
+	}
+	/**
+	 * 获取：对面聊天人的ID
+	 */
+	public Long getTalkTo() {
+		return talkTo;
+	}
+	/**
+	 * 设置：对面聊天人的姓名
+	 */
+	public void setTalkToName(String talkToName) {
+		this.talkToName = talkToName;
+	}
+	/**
+	 * 获取：对面聊天人的姓名
+	 */
+	public String getTalkToName() {
+		return talkToName;
+	}
+	/**
+	 * 设置：消息类型ID
+	 */
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+	/**
+	 * 获取：消息类型ID
+	 */
+	public Long getCategoryId() {
+		return categoryId;
+	}
+	/**
+	 * 设置：消息类型对应的服务ID
+	 */
+	public void setCategoryMessageId(Long categoryMessageId) {
+		this.categoryMessageId = categoryMessageId;
+	}
+	/**
+	 * 获取：消息类型对应的服务ID
+	 */
+	public Long getCategoryMessageId() {
+		return categoryMessageId;
 	}
 }

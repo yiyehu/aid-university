@@ -1,6 +1,9 @@
 package tech.yiyehu.modules.app.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -16,6 +19,9 @@ import tech.yiyehu.modules.app.service.MessageService;
 @Service("messageService")
 public class MessageServiceImpl extends ServiceImpl<MessageDao, MessageEntity> implements MessageService {
 
+	@Autowired
+	MessageDao messageDao;
+	
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Page<MessageEntity> page = this.selectPage(
@@ -25,5 +31,10 @@ public class MessageServiceImpl extends ServiceImpl<MessageDao, MessageEntity> i
 
         return new PageUtils(page);
     }
+
+	@Override
+	public List<MessageEntity> queryRelevantMessages(Long userId, Long talkTo, Long categoryId) {
+		return messageDao.queryRelevantMessages(userId, talkTo, categoryId);
+	}
 
 }
