@@ -1,8 +1,10 @@
 package tech.yiyehu.modules.app.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -23,6 +25,9 @@ import tech.yiyehu.modules.app.service.UserService;
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements UserService {
 
+	@Autowired
+	UserDao userDao;
+	
 	@Override
 	public UserEntity queryByMobile(String mobile) {
 		UserEntity userEntity = new UserEntity();
@@ -67,4 +72,17 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
 
         return new PageUtils(page);
     }
+
+	@Override
+	public List<UserEntity> queryRelevantChatUsers(Long userId,Long categoryId) {
+		
+		return userDao.queryRelevantChatUsers(userId,categoryId);
+	}
+
+	@Override
+	public UserEntity clearInformation(UserEntity user) {
+		user.setPassword("");
+		user.setAddress(null);
+		return user;
+	}
 }

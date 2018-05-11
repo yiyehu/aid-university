@@ -2,7 +2,11 @@ package tech.yiyehu.modules.app.dao;
 
 import tech.yiyehu.modules.app.entity.UserEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 用户
@@ -14,4 +18,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDao extends BaseMapper<UserEntity> {
 	
+	/**
+	 * 查询用户的所有相关聊天的人员
+	 * @param userId  用户ID
+	 * @param categoryId 消息类型
+	 */
+	List<UserEntity> queryRelevantChatUsers(@Param("userId")Long userId, @Param("categoryId")Long categoryId);
 }

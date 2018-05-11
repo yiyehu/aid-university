@@ -10,9 +10,19 @@
         <result property="mobile" column="mobile"/>
         <result property="createTime" column="create_time"/>
         <result property="password" column="password"/>
-        <result property="imgbyte" column="imgbyte"/>
+        <result property="img" column="img"/>
         <result property="address" column="address"/>
+        <result property="pathKey" column="path_key"/>
     </resultMap>
 
+    <select id="queryRelevantChatUsers" resultMap="userMap">
+		select *
+		from tb_user
+		where user_id in (
+			select user_id as id from tb_message where talk_to = #{userId} and category_id = #{categoryId}
+			union
+			select talk_to as id from tb_message where user_id = #{userId} and category_id = #{categoryId}
+		);
+	</select>
 
 </mapper>

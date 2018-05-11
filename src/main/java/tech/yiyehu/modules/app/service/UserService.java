@@ -1,6 +1,7 @@
 package tech.yiyehu.modules.app.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.service.IService;
@@ -34,4 +35,18 @@ public interface UserService extends IService<UserEntity> {
 	PageUtils queryPage(Map<String, Object> params);
 
 	PageUtils queryPage(Map<String, Object> params, UserEntity userEntity);
+	
+	/**
+	 * 查询用户的所有相关聊天的人员
+	 * @param userId  用户ID
+	 * @param categoryId 
+	 */
+	List<UserEntity> queryRelevantChatUsers(Long userId, Long categoryId);
+	
+	/**
+	 * 清除一些关键信息
+	 * @param user
+	 * @return
+	 */
+	UserEntity clearInformation(UserEntity user);
 }

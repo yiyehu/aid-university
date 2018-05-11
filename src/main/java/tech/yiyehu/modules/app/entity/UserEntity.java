@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  * @author yiyehu
  * @email zhuangyuan.k@gmail.com
- * @date 2018-04-07 18:06:12
+ * @date 2018-04-10 10:37:53
  */
 @TableName("tb_user")
 public class UserEntity implements Serializable {
@@ -48,6 +48,10 @@ public class UserEntity implements Serializable {
 	 * 默认地址
 	 */
 	private Long address;
+	/**
+	 * 云存储key
+	 */
+	private String pathKey;
 
 	/**
 	 * 设置：用户ID
@@ -132,5 +136,17 @@ public class UserEntity implements Serializable {
 	 */
 	public Long getAddress() {
 		return address;
+	}
+	/**
+	 * 设置：云存储key
+	 */
+	public void setPathKey(String pathKey) {
+		this.pathKey = pathKey;
+	}
+	/**
+	 * 获取：云存储key
+	 */
+	public String getPathKey() {
+		return pathKey;
 	}
 }
