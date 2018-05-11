@@ -31,6 +31,7 @@ create table tb_user
    password             varchar(64) COMMENT '密码',
    img                  varchar(200) COMMENT '小图标',
    address              bigint COMMENT '默认地址',
+   path_key				varchar(200) COMMENT '云存储key',
    primary key (user_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=1;
 
@@ -190,18 +191,19 @@ create table tb_message
 (
    message_id           bigint not null AUTO_INCREMENT COMMENT '留言ID',
    parent_id            bigint COMMENT '留言的上级ID',
-   goods_id				int COMMENT '商品ID',
    content              varchar(1000) COMMENT '留言内容',
-   is_anon              smallint COMMENT '是否匿名',
+   anon              smallint COMMENT '是否匿名',
    create_time          datetime COMMENT '添加时间',
    user_id              char(10) COMMENT '留言人ID',
    user_name            varchar(30) COMMENT '留言人姓名',
+   category_id          bigint  COMMENT '消息类型',
+   category__message_id     bigint COMMENT '消息类型对应服务的ID',
    primary key (message_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='留言' AUTO_INCREMENT=1;
 
 
-alter table tb_message add constraint FK_goods_message foreign key (goods_id)
-      references tb_goods (goods_id) on delete restrict on update restrict;
+alter table tb_message add constraint FK_category_message foreign key (category_id)
+      references tb_category (category_id) on delete restrict on update restrict;
 
 drop table if exists tb_order;
 
@@ -309,4 +311,33 @@ from
    left join tb_category as c on a.category_id=c.category_id
    left join tb_goods_images as d on a.goods_id=d.goods_id
 group by a.goods_id;
-	  
+
+
+
+drop table if exists tb_aid_order;
+
+/*==============================================================*/
+/* Table: tb_aid_order                                          */
+/*==============================================================*/
+create table tb_aid_order
+(
+   aid_id               bigint not null AUTO_INCREMENT COMMENT '帮帮订单ID',
+   category_id          bigint COMMENT '分类ID',
+   create_time          datetime not null COMMENT '创建时间',
+   deadline             datetime COMMENT '截至时间',
+   finish_time          datetime COMMENT '完成时间',
+   title          		varchar(200) COMMENT '标题',
+   description          varchar(1000) COMMENT '订单描述',
+   status               smallint COMMENT '订单状态',
+   order_address        varchar(200) COMMENT '订单地址',
+   remuneration         int COMMENT '接单报酬',
+   payment_method       int COMMENT '付款方式',
+   receiver_id          bigint COMMENT '接单人ID',
+   receiver_contact     varchar(20) COMMENT '接单人联系方式',
+   creator_id           bigint COMMENT '创建人ID',
+   creator_contact      varchar(20) COMMENT '创建人联系方式',
+   comment_thing        varchar(200) COMMENT '评价',
+   comment_star         smallint  COMMENT '星级',
+   received_info        varchar(200) COMMENT '接单后信息',
+   primary key (aid_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='帮帮订单' AUTO_INCREMENT=1;
