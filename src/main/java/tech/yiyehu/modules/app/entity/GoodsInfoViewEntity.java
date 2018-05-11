@@ -25,7 +25,7 @@ public class GoodsInfoViewEntity implements Serializable {
 	 * 商品ID
 	 */
 	@TableId
-	private Integer goodsId;
+	private Long goodsId;
 	/**
 	 * 用户ID
 	 */
@@ -117,13 +117,13 @@ public class GoodsInfoViewEntity implements Serializable {
 	/**
 	 * 设置：商品ID
 	 */
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(Long goodsId) {
 		this.goodsId = goodsId;
 	}
 	/**
 	 * 获取：商品ID
 	 */
-	public Integer getGoodsId() {
+	public Long getGoodsId() {
 		return goodsId;
 	}
 	/**

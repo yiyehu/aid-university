@@ -52,19 +52,30 @@ public class GoodsInfoViewController {
         for(GoodsInfoViewEntity goodsInfoViewEntity :(List<GoodsInfoViewEntity>) page.getList()) {
         	
         	MessageEntity messageEntity = new MessageEntity();
-        	messageEntity.setGoodsId(goodsInfoViewEntity.getGoodsId());
+        	messageEntity.setCategoryId(3l);
+        	messageEntity.setCategoryMessageId(goodsInfoViewEntity.getGoodsId());
         	EntityWrapper<MessageEntity> wrapper = new EntityWrapper<MessageEntity>(messageEntity);
         	int count = messageService.selectCount(wrapper);
         	goodsInfoViewEntity.setMessageCount(count);
-        	wrapper.last("limit 2");
-        	List<MessageEntity> list = messageService.selectList(new EntityWrapper<MessageEntity>(messageEntity));
+        	
+        	wrapper.last("LIMIT 2");
+        	List<MessageEntity> list = messageService.selectList(wrapper);
         	goodsInfoViewEntity.setMessagelist(list);
         	
         }
         return R.ok().put("page", page);
     }
 
-
+    /**
+     * 列表
+     */
+	@RequestMapping("/booklist")
+    public R booklistOfApp(@RequestParam Map<String, Object> params){
+		
+        PageUtils page = goodsInfoViewService.queryPage(params);
+        return R.ok().put("page", page);
+    }
+    
     /**
      * 信息
      */
@@ -82,10 +93,9 @@ public class GoodsInfoViewController {
     @Login
     @RequestMapping("/listOfLogin")
     public R listOfLogin(@RequestParam Map<String, Object> params,@RequestAttribute("userId") Long userId){
-    	GoodsInfoViewEntity goodsInfoViewEntity = new GoodsInfoViewEntity();
-    	goodsInfoViewEntity.setUserId(userId);
+    	params.put("userId", userId);
+    	params.put("orderBy","addtime desc");
         PageUtils page = goodsInfoViewService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 }

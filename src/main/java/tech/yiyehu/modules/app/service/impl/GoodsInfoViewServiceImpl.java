@@ -28,15 +28,25 @@ public class GoodsInfoViewServiceImpl extends ServiceImpl<GoodsInfoViewDao, Good
 	
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+    	EntityWrapper<GoodsInfoViewEntity> ew =  new EntityWrapper<GoodsInfoViewEntity>();
+    	if(params.get("status")!=null) {
+    		ew.where("status = {0}",params.get("status").toString());
+    	}
+    	if(params.get("userId")!=null) {
+    		ew.where("user_id = {0}",params.get("userId").toString());
+    	}
+    	if(params.get("categoryId")!=null) {
+    		ew.where("category_id = {0}",params.get("categoryId").toString());
+    	}
+    	if(params.get("orderBy")!=null) {
+        	ew.orderBy(params.get("orderBy").toString());
+    	}
         Page<GoodsInfoViewEntity> page = this.selectPage(
                 new Query<GoodsInfoViewEntity>(params).getPage(),
-                new EntityWrapper<GoodsInfoViewEntity>()
+                ew
         );
         File file=null;
-        File image = new File(FileUtils.resoucePath+"image/");
-		if(!image.exists()) {
-			image.mkdirs();
-		}
+        FileUtils.makedir(FileUtils.resoucePath+"image/");//如果没有image文件夹，创建image文件夹
 		String realPath;
         for(GoodsInfoViewEntity entity : page.getRecords()) {
 			realPath = FileUtils.resoucePath+"image/"+FileUtils.getFileName(entity.getGoodsImg());

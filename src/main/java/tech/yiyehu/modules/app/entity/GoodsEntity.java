@@ -22,7 +22,7 @@ public class GoodsEntity implements Serializable {
 	 * 商品ID
 	 */
 	@TableId
-	private Integer goodsId;
+	private long goodsId;
 	/**
 	 * 用户ID
 	 */
@@ -71,13 +71,13 @@ public class GoodsEntity implements Serializable {
 	/**
 	 * 设置：商品ID
 	 */
-	public void setGoodsId(Integer goodsId) {
+	public void setGoodsId(long goodsId) {
 		this.goodsId = goodsId;
 	}
 	/**
 	 * 获取：商品ID
 	 */
-	public Integer getGoodsId() {
+	public long getGoodsId() {
 		return goodsId;
 	}
 	/**
