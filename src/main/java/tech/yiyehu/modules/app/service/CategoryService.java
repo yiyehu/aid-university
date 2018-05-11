@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.service.IService;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.modules.app.entity.CategoryEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface CategoryService extends IService<CategoryEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+	List<CategoryEntity> queryCategoryByParentId(long parentId);
 }
 
