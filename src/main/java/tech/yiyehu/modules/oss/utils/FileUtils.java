@@ -15,6 +15,17 @@ public class FileUtils {
 		return FileUtils.class.getResource("").toString();
 	}
 
+	/**
+	 * 创建对应路径的目录，如果没有则创建
+	 * @param dirPath 目录路径
+	 */
+	public static void makedir(String dirPath) {
+		File dir = new File(dirPath);
+		if(!dir.exists()) {
+			dir.mkdirs();
+		}
+	}
+	
 	public static String getFileName(String path) {
 
 		path = path.substring(path.lastIndexOf("/") + 1, path.length());
