@@ -49,6 +49,17 @@ public class GoodsController {
 		return R.ok().put("page", page);
 	}
 
+	 /**
+     * 列表
+     */
+    @RequestMapping("/list/{userId}")
+    public R listWithUserId(@RequestParam Map<String, Object> params,@PathVariable("userId") long userId){
+    	params.put("userId", userId);
+    	PageUtils page = goodsService.queryPage(params);
+
+		return R.ok().put("page", page);
+    }
+	
 	/**
 	 * 信息
 	 */

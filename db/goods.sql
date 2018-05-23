@@ -341,3 +341,47 @@ create table tb_aid_order
    received_info        varchar(200) COMMENT '接单后信息',
    primary key (aid_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8  COMMENT='帮帮订单' AUTO_INCREMENT=1;
+
+
+
+create view tb_order_info_view
+as
+select
+   s.order_id,
+   s.address_id,
+   s.comment_id,
+   s.status,
+   s.create_time,
+   s.remark,
+   s.goods_money,
+   s.deliver_type,
+   s.deliver_money,
+   s.total_money,
+   s.real_total_money,
+   s.payType,
+   s.user_name,
+   s.user_adress,
+   s.user_mobile,
+   s.goods_id,
+   b.user_id as owner_id,
+   b.username as owner_name,
+   b.img as owner_img,
+   e.user_id as customer_id,
+   e.username as customer_name,
+   a.category_id,
+   a.name as goods_name,
+   a.price,
+   a.description,
+   a.goods_address,
+   c.name as category_name,
+   c.icon as category_icon,
+   d.local_path as goods_img,
+   d.path_key as goods_img_key
+from
+   tb_order as s 
+   left join tb_goods as a on s.goods_id=a.goods_id
+   left join tb_user as b on a.user_id=b.user_id
+   left join tb_category as c on a.category_id=c.category_id
+   left join tb_goods_images as d on a.goods_id=d.goods_id
+   left join tb_user as e on s.user_id=e.user_id
+group by a.goods_id;

@@ -1,11 +1,17 @@
 package tech.yiyehu.modules.app.entity;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
+
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户
@@ -26,10 +32,14 @@ public class UserEntity implements Serializable {
 	/**
 	 * 用户姓名
 	 */
+	@NotBlank(message="用户名不能为空")
+	@Length(max=20, min=1, message="用户名长度超出20")
 	private String username;
 	/**
 	 * 手机号
 	 */
+	@NotBlank
+	@Pattern(regexp="^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$", message="手机号格式不正确")
 	private String mobile;
 	/**
 	 * 创建时间
@@ -51,6 +61,7 @@ public class UserEntity implements Serializable {
 	/**
 	 * 云存储key
 	 */
+	@URL(message="无效的URL地址")
 	private String pathKey;
 
 	/**

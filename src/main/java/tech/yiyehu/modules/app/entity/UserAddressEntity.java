@@ -2,6 +2,12 @@ package tech.yiyehu.modules.app.entity;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
@@ -24,10 +30,13 @@ public class UserAddressEntity implements Serializable {
 	/**
 	 * 用户ID
 	 */
+	@NotNull(message="用户ID不存在")
 	private Long userId;
 	/**
-	 * 用户姓名
+	 * 收件人姓名
 	 */
+	@NotBlank(message="用户名不能为空")
+	@Length(max=20, message="用户名长度超出20")
 	private String name;
 	/**
 	 * 省份ID
@@ -48,22 +57,31 @@ public class UserAddressEntity implements Serializable {
 	/**
 	 * 省份名称
 	 */
+	@NotBlank(message="省份名不能为空")
+	@Length(max=20, message="省份名长度超出20")
 	private String provinceName;
 	/**
 	 * 城市名称
 	 */
+	@NotBlank(message="城市名不能为空")
+	@Length(max=20, message="城市名长度超出20")
 	private String cityName;
 	/**
 	 * 县区名称
 	 */
+	@NotBlank(message="县区名称不能为空")
+	@Length(max=20, message="县区名称长度超出20")
 	private String regionName;
 	/**
 	 * 城镇名称
 	 */
+	@Length(max=20, message="用户名长度超出20")
 	private String townName;
 	/**
 	 * 详细地址
 	 */
+	@NotBlank(message="详细地址不能为空")
+	@Length(max=200, message="详细地址长度超出200")
 	private String address;
 	/**
 	 * 电话号
@@ -72,6 +90,7 @@ public class UserAddressEntity implements Serializable {
 	/**
 	 * 手机号
 	 */
+	@Pattern(regexp="^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$", message="手机号格式不正确")
 	private String mobile;
 	/**
 	 * 是否为默认地址
@@ -103,13 +122,13 @@ public class UserAddressEntity implements Serializable {
 		return userId;
 	}
 	/**
-	 * 设置：用户姓名
+	 * 设置：收件人姓名
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	/**
-	 * 获取：用户姓名
+	 * 获取：收件人姓名
 	 */
 	public String getName() {
 		return name;

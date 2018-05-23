@@ -156,4 +156,37 @@ public class Constant {
 			return list;
 		}
 	}
+	
+	public enum DeliveryMethod {
+		/**
+		 * 买家取货
+		 */
+		 CUSTOMERTAKE  ,
+		
+		/**
+		 * 卖家送货
+		 */
+		 SELLERDELIVERY,
+		
+		/**
+		 * 快递
+		 */
+		 EXPRESS;
+		public static List<Map<String,Object>> getAllStatus() {
+			List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("name", "买家取货");
+			map.put("status",0);
+			list.add(map);
+			map = new HashMap<String,Object>();
+			map.put("name", "卖家送货");
+			map.put("status",1);
+			list.add(map);
+			map = new HashMap<String,Object>();
+			map.put("name", "快递");
+			map.put("status",2);
+			list.add(map);
+			return list;
+		}
+	}
 }

@@ -1,13 +1,15 @@
 package tech.yiyehu.modules.app.service.impl;
 
-import org.springframework.stereotype.Service;
 import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.Query;
-
 import tech.yiyehu.modules.app.dao.GoodsDao;
 import tech.yiyehu.modules.app.entity.GoodsEntity;
 import tech.yiyehu.modules.app.service.GoodsService;
@@ -18,9 +20,22 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsEntity> impleme
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+    	EntityWrapper<GoodsEntity> ew =  new EntityWrapper<GoodsEntity>();
+    	if(params.get("status")!=null) {
+    		ew.where("status = {0}",params.get("status").toString());
+    	}
+    	if(params.get("userId")!=null) {
+    		ew.where("user_id = {0}",params.get("userId").toString());
+    	}
+    	if(params.get("categoryId")!=null) {
+    		ew.where("category_id = {0}",params.get("categoryId").toString());
+    	}
+    	if(params.get("orderBy")!=null) {
+        	ew.orderBy(params.get("orderBy").toString());
+    	}
         Page<GoodsEntity> page = this.selectPage(
                 new Query<GoodsEntity>(params).getPage(),
-                new EntityWrapper<GoodsEntity>()
+                ew
         );
 
         return new PageUtils(page);

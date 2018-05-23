@@ -11,7 +11,7 @@ import tech.yiyehu.modules.app.utils.Constant;
 public class ConstantController {
 
 	/**
-	 * goods状态的map
+	 * 商品状态
 	 */
 	@RequestMapping("/goodsStatus")
 	public R goodsStatus() {
@@ -19,7 +19,7 @@ public class ConstantController {
 	}
 	
 	/**
-	 * goods状态的map
+	 * 帮帮订单状态
 	 */
 	@RequestMapping("/bangBangStatus")
 	public R bangBangStatus() {
@@ -27,18 +27,26 @@ public class ConstantController {
 	}
 	
 	/**
-	 * goods状态的map
+	 * 商品订单状态
 	 */
-	@RequestMapping("/GoodsOrderStatus")
+	@RequestMapping("/goodsOrderStatus")
 	public R GoodsOrderStatus() {
-		return R.ok().put("GoodsOrderStatus", Constant.GoodsOrderStatusEnum.getAllStatus());
+		return R.ok().put("goodsOrderStatus", Constant.GoodsOrderStatusEnum.getAllStatus());
 	}
 	
 	/**
-	 * goods状态的map
+	 * 支付方式
 	 */
 	@RequestMapping("/paymentMethod")
 	public R paymentMethod() {
 		return R.ok().put("paymentMethod", Constant.PaymentMethod.getAllStatus());
+	}
+	
+	/**
+	 * 配送方式
+	 */
+	@RequestMapping("/deliveryMethod")
+	public R deliveryMethod() {
+		return R.ok().put("deliveryMethod", Constant.DeliveryMethod.getAllStatus());
 	}
 }

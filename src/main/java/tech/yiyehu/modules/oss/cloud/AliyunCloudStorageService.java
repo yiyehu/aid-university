@@ -95,7 +95,7 @@ public class AliyunCloudStorageService extends CloudStorageService {
 				client.getObject(new GetObjectRequest(config.getAliyunBucketName(), key),localFile);
 			}
 			catch(Exception e) {
-				return true;
+				throw new RRException("云存储本地下载失败："+e.getMessage());
 			}
 			return true;
 		}

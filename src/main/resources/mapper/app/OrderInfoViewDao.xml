@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.yiyehu.modules.app.dao.OrderInfoViewDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="tech.yiyehu.modules.app.entity.OrderInfoViewEntity" id="orderInfoViewMap">
+        <result property="orderId" column="order_id"/>
+        <result property="addressId" column="address_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="commentId" column="comment_id"/>
+        <result property="ownerId" column="owner_id"/>
+        <result property="ownerName" column="owner_name"/>
+        <result property="ownerImg" column="owner_img"/>
+        <result property="customerId" column="customer_id"/>
+        <result property="customerName" column="customer_name"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="remark" column="remark"/>
+        <result property="goodsMoney" column="goods_money"/>
+        <result property="deliverType" column="deliver_type"/>
+        <result property="deliverMoney" column="deliver_money"/>
+        <result property="totalMoney" column="total_money"/>
+        <result property="realTotalMoney" column="real_total_money"/>
+        <result property="paytype" column="payType"/>
+        <result property="userName" column="user_name"/>
+        <result property="userAdress" column="user_adress"/>
+        <result property="userMobile" column="user_mobile"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="price" column="price"/>
+        <result property="goodsAddress" column="goods_address"/>
+        <result property="description" column="description"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="categoryIcon" column="category_icon"/>
+        <result property="goodsImg" column="goods_img"/>
+        <result property="goodsImgKey" column="goods_img_key"/>
+    </resultMap>
+
+
+</mapper>

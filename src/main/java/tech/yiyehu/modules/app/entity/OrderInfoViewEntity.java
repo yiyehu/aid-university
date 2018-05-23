@@ -1,18 +1,11 @@
 package tech.yiyehu.modules.app.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Length;
-
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 订单
@@ -21,8 +14,8 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * @email zhuangyuan.k@gmail.com
  * @date 2018-04-18 14:41:52
  */
-@TableName("tb_order")
-public class OrderEntity implements Serializable {
+@TableName("tb_order_info_view")
+public class OrderInfoViewEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -31,32 +24,32 @@ public class OrderEntity implements Serializable {
 	@TableId
 	private Long orderId;
 	/**
+	 * 收货地址ID
+	 */
+	private Long addressId;
+	/**
 	 * 商品ID
 	 */
-	@NotNull(message="商品ID不存在")
-	private Long goodsId;
+	private Integer goodsId;
 	/**
 	 * 评价ID
 	 */
 	private Long commentId;
 	/**
-	 * 收货地址ID
+	 * 卖家ID
 	 */
-	private Long addressId;
+	private Long ownerId;
+	private String ownerName;
+	private String ownerImg;
 	/**
-	 * 用户ID
+	 * 买家ID
 	 */
-	@NotNull
-	private Long userId;
-	/**
-	 * 是否评价
-	 */
-	private Integer isComment;
+	private Long customerId;
+	private String customerName;
+
 	/**
 	 * 订单状态
 	 */
-	@DecimalMin("0")
-	@DecimalMax("4")
 	private Integer status;
 	/**
 	 * 下单时间
@@ -69,7 +62,6 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 商品金额
 	 */
-	@DecimalMin("0")
 	private Integer goodsMoney;
 	/**
 	 * 收货方式
@@ -78,12 +70,10 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 快递费用
 	 */
-	@DecimalMin("0")
 	private Integer deliverMoney;
 	/**
 	 * 订单总金额
 	 */
-	@DecimalMin("0")
 	private Integer totalMoney;
 	/**
 	 * 实际订单总金额
@@ -94,25 +84,46 @@ public class OrderEntity implements Serializable {
 	 */
 	private Integer paytype;
 	/**
-	 * 支付来源
-	 */
-	private Integer payfrom;
-	/**
 	 * 收货人姓名
 	 */
-	@Length(max=20, message="用户名长度超出20")
 	private String userName;
 	/**
 	 * 收货人地址
 	 */
-	@Length(max=200, message="收货人地址长度超出200")
 	private String userAdress;
 	/**
 	 * 收货人手机
 	 */
-	@Pattern(regexp="^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$", message="手机号格式不正确")
 	private String userMobile;
+//---------------------------------------------------------------goods
 
+	/**
+	 * 价格
+	 */
+	private BigDecimal price;
+	/**
+	 * 商品地址
+	 */
+	private String goodsAddress;
+
+	/**
+	 * 商品名称
+	 */
+	private String goodsName;
+	private String goodsImg;
+	private String goodsImgKey;
+	/**
+	 * 商品描述
+	 */
+	private String description;
+//----------------------------------------------------------------category	
+	/**
+	 * 分类ID
+	 */
+	private Long categoryId;
+	private String categoryName;
+	private String categoryIcon;
+	
 	/**
 	 * 设置：订单ID
 	 */
@@ -128,13 +139,13 @@ public class OrderEntity implements Serializable {
 	/**
 	 * 设置：商品ID
 	 */
-	public void setGoodsId(Long goodsId) {
+	public void setGoodsId(Integer goodsId) {
 		this.goodsId = goodsId;
 	}
 	/**
 	 * 获取：商品ID
 	 */
-	public Long getGoodsId() {
+	public Integer getGoodsId() {
 		return goodsId;
 	}
 	/**
@@ -161,30 +172,8 @@ public class OrderEntity implements Serializable {
 	public Long getAddressId() {
 		return addressId;
 	}
-	/**
-	 * 设置：用户ID
-	 */
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	/**
-	 * 获取：用户ID
-	 */
-	public Long getUserId() {
-		return userId;
-	}
-	/**
-	 * 设置：是否评价
-	 */
-	public void setIsComment(Integer isComment) {
-		this.isComment = isComment;
-	}
-	/**
-	 * 获取：是否评价
-	 */
-	public Integer getIsComment() {
-		return isComment;
-	}
+
+
 	/**
 	 * 设置：订单状态
 	 */
@@ -294,18 +283,6 @@ public class OrderEntity implements Serializable {
 		return paytype;
 	}
 	/**
-	 * 设置：支付来源
-	 */
-	public void setPayfrom(Integer payfrom) {
-		this.payfrom = payfrom;
-	}
-	/**
-	 * 获取：支付来源
-	 */
-	public Integer getPayfrom() {
-		return payfrom;
-	}
-	/**
 	 * 设置：收货人姓名
 	 */
 	public void setUserName(String userName) {
@@ -341,4 +318,90 @@ public class OrderEntity implements Serializable {
 	public String getUserMobile() {
 		return userMobile;
 	}
+	public Long getOwnerId() {
+		return ownerId;
+	}
+	public void setOwnerId(Long ownerId) {
+		this.ownerId = ownerId;
+	}
+	public String getOwnerName() {
+		return ownerName;
+	}
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+	public String getOwnerImg() {
+		return ownerImg;
+	}
+	public void setOwnerImg(String ownerImg) {
+		this.ownerImg = ownerImg;
+	}
+	public Long getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public BigDecimal getPrice() {
+		return price;
+	}
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+	public String getGoodsAddress() {
+		return goodsAddress;
+	}
+	public void setGoodsAddress(String goodsAddress) {
+		this.goodsAddress = goodsAddress;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public String getGoodsImg() {
+		return goodsImg;
+	}
+	public void setGoodsImg(String goodsImg) {
+		this.goodsImg = goodsImg;
+	}
+	public String getGoodsImgKey() {
+		return goodsImgKey;
+	}
+	public void setGoodsImgKey(String goodsImgKey) {
+		this.goodsImgKey = goodsImgKey;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Long getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getCategoryIcon() {
+		return categoryIcon;
+	}
+	public void setCategoryIcon(String categoryIcon) {
+		this.categoryIcon = categoryIcon;
+	}
+	
+	
 }

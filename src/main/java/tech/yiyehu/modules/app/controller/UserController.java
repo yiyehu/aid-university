@@ -18,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import tech.yiyehu.common.exception.RRException;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
+import tech.yiyehu.common.validator.ValidatorUtils;
 import tech.yiyehu.modules.app.annotation.Login;
 import tech.yiyehu.modules.app.annotation.LoginUser;
 import tech.yiyehu.modules.app.entity.UserEntity;
@@ -35,31 +36,6 @@ import tech.yiyehu.modules.app.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
-	/**
-	 * 列表
-	 */
-	// @RequestMapping("/list")
-	// @RequiresPermissions("app:user:list")
-	// public R list(@RequestParam Map<String, Object> params){
-	// PageUtils page = null;
-	// UserEntity userEntity = new UserEntity();
-	// boolean change = false;
-	// if(params.get("username")!=null && params.get("username")!="") {
-	// userEntity.setUsername(params.get("username").toString());
-	// change = true;
-	// }
-	// if(params.get("mobile")!=null&& params.get("mobile")!="") {
-	// userEntity.setMobile(params.get("mobile").toString());
-	// change = true;
-	// }
-	// if(change) {
-	// page = userService.queryPage(params,userEntity);
-	// }else {
-	// page = userService.queryPage(params);
-	// }
-	// return R.ok().put("page", page);
-	// }
 
 	@RequestMapping("/list")
 	@RequiresPermissions("app:user:list")
@@ -85,8 +61,10 @@ public class UserController {
 	@RequestMapping("/save")
 	@RequiresPermissions("app:user:save")
 	public R save(@RequestBody UserEntity user) {
+		//表单校验
+        ValidatorUtils.validateEntity(user);
+        
 		userService.insert(user);
-
 		return R.ok();
 	}
 

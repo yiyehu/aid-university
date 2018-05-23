@@ -24,6 +24,7 @@ import tech.yiyehu.modules.app.entity.UserAddressEntity;
 import tech.yiyehu.modules.app.service.UserAddressService;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
+import tech.yiyehu.common.validator.ValidatorUtils;
 
 /**
  * 用户地址
@@ -119,12 +120,29 @@ public class UserAddressController {
 	}
 
 	/**
+	 * 默认地址
+	 */
+	@Login
+	@GetMapping("/defaultUserAddress")
+	public R defaultUserAddress(@RequestAttribute("userId") Long userId) {
+		UserAddressEntity userAddress = new UserAddressEntity();
+		userAddress.setDefaultAddr(1);
+		userAddress.setUserId(userId);
+		EntityWrapper<UserAddressEntity> wrapper  =  new EntityWrapper<UserAddressEntity>();
+		wrapper.setEntity(userAddress);
+		userAddress = userAddressService.selectOne(wrapper);
+		return R.ok().put("userAddress", userAddress);
+	}
+	
+	/**
 	 * 保存OfLogin
 	 */
 	@Login
 	@PostMapping("/saveOfLogin")
 	public R saveOfLogin(@RequestBody UserAddressEntity userAddress, @RequestAttribute("userId") Long userId) {
 		userAddress.setUserId(userId);
+		//表单校验
+        ValidatorUtils.validateEntity(userAddress);
 		userAddressService.insert(userAddress);
 		return R.ok();
 	}
