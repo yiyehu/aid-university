@@ -1,17 +1,15 @@
 package tech.yiyehu.modules.app.entity;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.validation.constraints.Pattern;
-
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 用户

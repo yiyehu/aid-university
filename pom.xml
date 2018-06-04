@@ -6,7 +6,7 @@
 	<groupId>tech.yiyehu</groupId>
 	<artifactId>aid-university</artifactId>
 	<version>2.0.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>aid-university</description>
 
 	<parent>
@@ -35,7 +35,7 @@
 		<qiniu.version>[7.2.0, 7.2.99]</qiniu.version>
 		<aliyun.oss.version>2.5.0</aliyun.oss.version>
 		<qcloud.cos.version>4.4</qcloud.cos.version>
-		<swagger.version>2.2.2</swagger.version>
+		<swagger.version>2.9.0</swagger.version>
 		<joda.time.version>2.9.9</joda.time.version>
 
 		<!--wagon plugin 配置 -->

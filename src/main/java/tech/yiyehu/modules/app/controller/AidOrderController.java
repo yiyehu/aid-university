@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import tech.yiyehu.modules.aid.entity.AidOrderEntity;
+import tech.yiyehu.modules.app.entity.UserEntity;
+import tech.yiyehu.modules.aid.service.AidOrderService;
+import tech.yiyehu.modules.app.service.UserService;
 import tech.yiyehu.modules.app.annotation.Login;
 import tech.yiyehu.modules.app.annotation.LoginUser;
-import tech.yiyehu.modules.app.entity.AidOrderEntity;
-import tech.yiyehu.modules.app.entity.UserEntity;
-import tech.yiyehu.modules.app.service.AidOrderService;
-import tech.yiyehu.modules.app.service.UserService;
 import tech.yiyehu.modules.app.utils.Constant;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
@@ -34,7 +36,8 @@ import tech.yiyehu.common.utils.R;
  * @email zhuangyuan.k@gmail.com
  * @date 2018-05-07 10:40:17
  */
-@RestController
+@RestController("appAidOrderController")
+@Api(value = "帮帮订单接口",tags = "帮帮订单接口")
 @RequestMapping("app/aidorder")
 public class AidOrderController {
 	@Autowired
@@ -42,66 +45,13 @@ public class AidOrderController {
 	@Autowired
 	private UserService userService;
 
-	/**
-	 * 列表
-	 */
-	@RequestMapping("/list")
-	public R list(@RequestParam Map<String, Object> params) {
-		params.put("orderBy", "create_time desc");
-		PageUtils page = aidOrderService.queryPage(params);
-
-		return R.ok().put("page", page);
-	}
-
-	/**
-	 * 信息
-	 */
-	@RequestMapping("/info/{aidId}")
-	@RequiresPermissions("app:aidorder:info")
-	public R info(@PathVariable("aidId") Long aidId) {
-		AidOrderEntity aidOrder = aidOrderService.selectById(aidId);
-
-		return R.ok().put("aidOrder", aidOrder);
-	}
-
-	/**
-	 * 保存
-	 */
-	@RequestMapping("/save")
-	@RequiresPermissions("app:aidorder:save")
-	public R save(@RequestBody AidOrderEntity aidOrder) {
-		aidOrderService.insert(aidOrder);
-
-		return R.ok();
-	}
-
-	/**
-	 * 修改
-	 */
-	@RequestMapping("/update")
-	@RequiresPermissions("app:aidorder:update")
-	public R update(@RequestBody AidOrderEntity aidOrder) {
-		aidOrderService.updateById(aidOrder);
-
-		return R.ok();
-	}
-
-	/**
-	 * 删除
-	 */
-	@RequestMapping("/delete")
-	@RequiresPermissions("app:aidorder:delete")
-	public R delete(@RequestBody Long[] aidIds) {
-		aidOrderService.deleteBatchIds(Arrays.asList(aidIds));
-
-		return R.ok();
-	}
 
 	/**
 	 * 列表
 	 */
 	@Login
-	@RequestMapping("/listOfLogin")
+	@ApiOperation("获取用户相关帮帮订单")
+	@GetMapping("/listOfLogin")
 	public R listOfLogin(@RequestParam Map<String, Object> params, @RequestAttribute("userId") Long userId) {
 		params.put("userId", userId);
 		params.put("orderBy", "create_time desc");
@@ -216,6 +166,7 @@ public class AidOrderController {
 	 * 删除ofLogin
 	 */
 	@Login
+	@ApiOperation("删除订单")
 	@DeleteMapping("/{aidId}")
 	public R deleteOfLogin(@PathVariable("aidId") Long aidId, @RequestAttribute("userId") Long userId) {
 		if (aidOrderService.selectById(aidId).getCreatorId() == userId) {

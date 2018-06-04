@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tech.yiyehu.common.utils.R;
 import tech.yiyehu.modules.app.annotation.Login;
-import tech.yiyehu.modules.app.entity.CartsEntity;
-import tech.yiyehu.modules.app.service.CartsService;
+import tech.yiyehu.modules.aid.entity.CartsEntity;
+import tech.yiyehu.modules.aid.service.CartsService;
 
 /**
  * 购物车
@@ -25,53 +25,11 @@ import tech.yiyehu.modules.app.service.CartsService;
  * @email zhuangyuan.k@gmail.com
  * @date 2018-04-18 14:41:52
  */
-@RestController
+@RestController("appCartsController")
 @RequestMapping("app/carts")
 public class CartsController {
 	@Autowired
 	private CartsService cartsService;
-	
-	/**
-	 * 信息
-	 */
-	@Login
-	@RequestMapping("/list")
-	public R list(@RequestParam Map<String, Object> params, @RequestAttribute("userId") Long userId) {
-		List<CartsEntity> list = new ArrayList<CartsEntity>();
-		list = cartsService.queryCartsInfoList(userId);
-		return R.ok().put("list", list);
-	}
 
-	/**
-	 * 信息
-	 */
-	@Login
-	@RequestMapping("/info/{cartId}")
-	public R info(@PathVariable("cartId") Long cartId) {
-		CartsEntity cartsEntity = cartsService.selectById(cartId);
-		return R.ok().put("cartsEntity", cartsEntity);
-	}
-
-	/**
-	 * 保存
-	 */
-	@Login
-	@RequestMapping("/save")
-	public R save(@RequestBody CartsEntity carts) {
-		cartsService.insert(carts);
-
-		return R.ok();
-	}
-
-	/**
-	 * 删除
-	 */
-	@Login
-	@RequestMapping("/delete")
-	public R delete(@RequestBody Long[] cartIds) {
-		cartsService.deleteBatchIds(Arrays.asList(cartIds));
-
-		return R.ok();
-	}
 
 }

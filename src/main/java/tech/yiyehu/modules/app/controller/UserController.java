@@ -8,12 +8,14 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import tech.yiyehu.common.exception.RRException;
 import tech.yiyehu.common.utils.PageUtils;
@@ -31,63 +33,12 @@ import tech.yiyehu.modules.app.service.UserService;
  * @email zhuangyuan.k@gmail.com
  * @date 2018-04-07 16:58:42
  */
-@RestController
+@RestController("appUserController")
+@Api("用户接口")
 @RequestMapping("app/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
-
-	@RequestMapping("/list")
-	@RequiresPermissions("app:user:list")
-	public R list(@RequestParam Map<String, Object> params) {
-		PageUtils page = userService.queryPage(params);
-		return R.ok().put("page", page);
-	}
-
-	/**
-	 * 信息
-	 */
-	@RequestMapping("/info/{userId}")
-	@RequiresPermissions("app:user:list")
-	public R info(@PathVariable("userId") Long userId) {
-		UserEntity user = userService.selectById(userId);
-
-		return R.ok().put("user", user);
-	}
-
-	/**
-	 * 保存
-	 */
-	@RequestMapping("/save")
-	@RequiresPermissions("app:user:save")
-	public R save(@RequestBody UserEntity user) {
-		//表单校验
-        ValidatorUtils.validateEntity(user);
-        
-		userService.insert(user);
-		return R.ok();
-	}
-
-	/**
-	 * 修改
-	 */
-	@RequestMapping("/update")
-	@RequiresPermissions("app:user:update")
-	public R update(@RequestBody UserEntity user) {
-		userService.updateById(user);
-		return R.ok();
-	}
-
-	/**
-	 * 删除
-	 */
-	@RequestMapping("/delete")
-	@RequiresPermissions("app:user:delete")
-	public R delete(@RequestBody Long[] userIds) {
-		userService.deleteBatchIds(Arrays.asList(userIds));
-
-		return R.ok();
-	}
 
 	/**
 	 * 查询用户的所有相关聊天的人员
@@ -96,8 +47,8 @@ public class UserController {
 	 *            用户ID
 	 */
 	@Login
-	@GetMapping("/queryRelevantChatUsers")
 	@ApiOperation("查询用户的所有相关聊天的人员")
+	@GetMapping("/queryRelevantChatUsers")
 	public R queryRelevantChatUsers(@RequestAttribute("userId") Long userId, @RequestParam Long categoryId) {
 
 		return R.ok().put("users", userService.queryRelevantChatUsers(userId, categoryId));
@@ -110,8 +61,8 @@ public class UserController {
 	 * @return
 	 */
 	@Login
-	@GetMapping("InfoOfLogin")
 	@ApiOperation("获取用户信息")
+	@GetMapping("InfoOfLogin")
 	public R InfoOfLogin(@LoginUser UserEntity user) {
 		return R.ok().put("user", user);
 	}
@@ -120,7 +71,8 @@ public class UserController {
 	 * 修改
 	 */
 	@Login
-	@RequestMapping("/changePasswordOfLogin")
+	@ApiOperation("用户修改密码")
+	@PostMapping("/changePasswordOfLogin")
 	public R changePasswordOfLogin(@LoginUser UserEntity user, @RequestParam String oldPassword,
 			@RequestParam String newPassword) {
 		if (!user.getPassword().equals(DigestUtils.sha256Hex(oldPassword))) {

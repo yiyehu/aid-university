@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
 import tech.yiyehu.modules.app.annotation.Login;
-import tech.yiyehu.modules.app.entity.OrderInfoViewEntity;
-import tech.yiyehu.modules.app.service.OrderInfoViewService;
+import tech.yiyehu.modules.aid.entity.OrderInfoViewEntity;
+import tech.yiyehu.modules.aid.service.OrderInfoViewService;
 
 /**
  * 订单
@@ -23,7 +23,7 @@ import tech.yiyehu.modules.app.service.OrderInfoViewService;
  * @email zhuangyuan.k@gmail.com
  * @date 2018-04-18 14:41:52
  */
-@RestController
+@RestController("appOrderInfoViewController")
 @RequestMapping("app/orderinfoview")
 public class OrderInfoViewController {
 	@Autowired

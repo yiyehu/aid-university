@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tech.yiyehu.modules.aid.dao.CartsDao">
+
+    <resultMap type="tech.yiyehu.modules.aid.entity.CartsEntity"
+               id="cartsMap">
+        <result property="cartId" column="cart_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="localPath" column="local_path"/>
+        <result property="pathKey" column="path_key"/>
+    </resultMap>
+
+    <select id="queryCartsInfoList" resultMap="cartsMap">
+        select cart_id,b.goods_id,b.name,b.price,c.local_path,c.path_key
+        from
+        tb_carts as a left join tb_goods as b on a.goods_id=b.goods_id left
+        join tb_goods_images as c on b.goods_id=c.goods_id
+        <if test="userId != null">
+            where a.user_id = #{userId}
+        </if>
+        group by cart_id
+    </select>
+
+    <select id="queryById" resultType="tech.yiyehu.modules.aid.entity.CartsEntity">
+		select cart_id,b.goods_id,b.name,b.price,c.local_path,c.path_key
+		from
+		tb_carts as a left join tb_goods as b on a.goods_id=b.goods_id left
+		join tb_goods_images as c on b.goods_id=c.goods_id
+		where a.cart_id = #{cartId}
+		group by cart_id
+	</select>
+</mapper>

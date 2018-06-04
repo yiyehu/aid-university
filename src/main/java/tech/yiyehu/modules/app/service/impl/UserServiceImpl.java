@@ -1,32 +1,30 @@
 package tech.yiyehu.modules.app.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.codec.digest.DigestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-
+import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tech.yiyehu.common.exception.RRException;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.Query;
 import tech.yiyehu.common.utils.SqlUtils;
 import tech.yiyehu.common.validator.Assert;
-import tech.yiyehu.modules.app.dao.UserDao;
 import tech.yiyehu.modules.app.entity.UserEntity;
 import tech.yiyehu.modules.app.form.LoginForm;
 import tech.yiyehu.modules.app.service.UserService;
+import tech.yiyehu.modules.app.dao.UserDao;
+
+import java.util.List;
+import java.util.Map;
 
 
 @Service("userService")
 public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements UserService {
 
 	@Autowired
-	UserDao userDao;
+    UserDao userDao;
 	
 	@Override
 	public UserEntity queryByMobile(String mobile) {
@@ -74,7 +72,7 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserEntity> implements
     }
 
 	@Override
-	public List<UserEntity> queryRelevantChatUsers(Long userId,Long categoryId) {
+	public List<UserEntity> queryRelevantChatUsers(Long userId, Long categoryId) {
 		
 		return userDao.queryRelevantChatUsers(userId,categoryId);
 	}

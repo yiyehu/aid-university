@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
+import io.swagger.annotations.ApiOperation;
 import tech.yiyehu.common.utils.PageUtils;
 import tech.yiyehu.common.utils.R;
 import tech.yiyehu.modules.app.annotation.Login;
-import tech.yiyehu.modules.app.entity.GoodsEntity;
-import tech.yiyehu.modules.app.entity.GoodsInfoViewEntity;
-import tech.yiyehu.modules.app.entity.MessageEntity;
-import tech.yiyehu.modules.app.service.GoodsInfoViewService;
-import tech.yiyehu.modules.app.service.GoodsService;
-import tech.yiyehu.modules.app.service.MessageService;
+import tech.yiyehu.modules.aid.entity.GoodsEntity;
+import tech.yiyehu.modules.aid.entity.GoodsInfoViewEntity;
+import tech.yiyehu.modules.aid.entity.MessageEntity;
+import tech.yiyehu.modules.aid.service.GoodsInfoViewService;
+import tech.yiyehu.modules.aid.service.GoodsService;
+import tech.yiyehu.modules.aid.service.MessageService;
 
 
 
@@ -31,7 +32,7 @@ import tech.yiyehu.modules.app.service.MessageService;
  * @email zhuangyuan.k@gmail.com
  * @date 2018-04-07 18:06:12
  */
-@RestController
+@RestController("appGoodsInfoViewController")
 @RequestMapping("app/goodsInfo")
 public class GoodsInfoViewController {
     @Autowired
@@ -91,6 +92,7 @@ public class GoodsInfoViewController {
      * 列表
      */
     @Login
+    @ApiOperation("用户获取与自己相关的商品信息")
     @RequestMapping("/listOfLogin")
     public R listOfLogin(@RequestParam Map<String, Object> params,@RequestAttribute("userId") Long userId){
     	params.put("userId", userId);

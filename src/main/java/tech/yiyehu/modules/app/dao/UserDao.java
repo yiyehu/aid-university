@@ -1,12 +1,11 @@
 package tech.yiyehu.modules.app.dao;
 
-import tech.yiyehu.modules.app.entity.UserEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import tech.yiyehu.modules.app.entity.UserEntity;
+
+import java.util.List;
 
 /**
  * 用户
@@ -23,5 +22,5 @@ public interface UserDao extends BaseMapper<UserEntity> {
 	 * @param userId  用户ID
 	 * @param categoryId 消息类型
 	 */
-	List<UserEntity> queryRelevantChatUsers(@Param("userId")Long userId, @Param("categoryId")Long categoryId);
+	List<UserEntity> queryRelevantChatUsers(@Param("userId") Long userId, @Param("categoryId") Long categoryId);
 }
