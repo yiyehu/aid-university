@@ -33,7 +33,7 @@ public class CategoryController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = categoryService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -44,8 +44,8 @@ public class CategoryController {
      * 信息
      */
     @RequestMapping("/info/{categoryId}")
-    public R info(@PathVariable("categoryId") Long categoryId){
-			CategoryEntity category = categoryService.selectById(categoryId);
+    public R info(@PathVariable("categoryId") Long categoryId) {
+        CategoryEntity category = categoryService.selectById(categoryId);
 
         return R.ok().put("category", category);
     }
@@ -55,8 +55,8 @@ public class CategoryController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("app:category:save")
-    public R save(@RequestBody CategoryEntity category){
-			categoryService.insert(category);
+    public R save(@RequestBody CategoryEntity category) {
+        categoryService.insert(category);
 
         return R.ok();
     }
@@ -66,8 +66,8 @@ public class CategoryController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("app:category:update")
-    public R update(@RequestBody CategoryEntity category){
-			categoryService.updateById(category);
+    public R update(@RequestBody CategoryEntity category) {
+        categoryService.updateById(category);
 
         return R.ok();
     }
@@ -77,8 +77,8 @@ public class CategoryController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("app:category:delete")
-    public R delete(@RequestBody Long[] categoryIds){
-			categoryService.deleteBatchIds(Arrays.asList(categoryIds));
+    public R delete(@RequestBody Long[] categoryIds) {
+        categoryService.deleteBatchIds(Arrays.asList(categoryIds));
 
         return R.ok();
     }

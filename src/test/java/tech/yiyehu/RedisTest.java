@@ -22,7 +22,7 @@ public class RedisTest {
 		user.setEmail("qqq@qq.com");
 		redisUtils.set("user", user);
 
-		System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user", SysUserEntity.class)));
+		System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user", SysUserEntity.class))+"test");
 	}
 
 }
